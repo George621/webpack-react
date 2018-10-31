@@ -1,0 +1,7 @@
+body {
+  background: #666; }
+  body h3 {
+    height: 50vh;
+    background: url(timg.jpeg) no-repeat center;
+    color: aqua; }
+
