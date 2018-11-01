@@ -1,0 +1,24 @@
+
+
+.nav-contain{
+  header{
+    margin-top: 20px;
+    line-height: 56px;
+    text-align: center;
+  }
+  .nav{
+    li{
+      float: left;
+      width: 150px;
+      height: 36px;
+      line-height: 36px;
+      border: 1px solid #ccc;
+      margin: 10px 20px;
+      text-align: center;
+      a{
+        display: block;
+        height: 100%;
+      }
+    }
+  }
+}

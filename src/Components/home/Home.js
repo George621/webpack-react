@@ -10,17 +10,17 @@ class Home extends Component {
         <h3>webpack + es6 + babel + react + 工作流配置</h3>
         <div className="banner-img"></div>
         {/* 需要服务器支持 */}
-        <BrowserRouter>
+        {/* <BrowserRouter>
           <PrimaryLayout></PrimaryLayout>
-        </BrowserRouter>
+        </BrowserRouter> */}
         {/* hash 这个自己搞定 不需要后端支持 */}
         <HashRouter>
           <PrimaryLayout></PrimaryLayout>
         </HashRouter>
         {/* url nothing change */}
-        <MemoryRouter>
+        {/* <MemoryRouter>
           <PrimaryLayout></PrimaryLayout>
-        </MemoryRouter>
+        </MemoryRouter> */}
 
       </div>
   }

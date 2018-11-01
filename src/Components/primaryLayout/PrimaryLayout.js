@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import HomePage from "../homePage/HomePage";
 import User from "../user/User";
+import "./primaryLayout.scss";
 
  class PrimaryLayout extends Component {
   constructor(props) {
@@ -9,9 +10,9 @@ import User from "../user/User";
   }
   
   render() {
-    return <div>
+    return <div className="nav-contain">
       <header> Our React Router4</header>
-      <ul>
+      <ul className="nav clear">
         <li>
           <Link to="/">HomeHomePage</Link>
         </li>
