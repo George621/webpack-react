@@ -3,7 +3,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const parts = require("./webpack.parts");
 const PATHS = {
-  app: path.join(__dirname, "src")
+  app: path.join(__dirname, "src"),
+  build:path.join(__dirname, "dist"),
 }
 
 const commonConfig = merge([
@@ -24,17 +25,36 @@ const commonConfig = merge([
   // },
   // parts.loadFont(),
   parts.loadJavaScript({ include: PATHS.app }),
-
+  
 ]);
 
 const productionConfig = merge([ 
+  {
+    output: {
+      chunkFilename: "[name].[chunkhash:4].js",
+      filename: "[name].[chunkhash:4].js",
+    },
+  },
   parts.extractCSS({
     use: ["css-loader", parts.autoprefix()],
   }),
   parts.loadImages({
     options: {
       limit: 15000,
-      name: "[name].[ext]",
+      name: "[name].[hash:4].[ext]",
+    },
+  }),
+  parts.clean(PATHS.build),
+  parts.attachRevision(),
+  parts.minifyJavaScript(),
+  parts.minifyCSS({
+    options: {
+      discardComments: {
+        removeAll: true,
+      },
+      // Run cssnano in safe mode to avoid
+      // potentially unsafe transformations.
+      safe: true,
     },
   }),
 ]);

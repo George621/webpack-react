@@ -1,14 +1,12 @@
-import component from "./component";
 import "./sass/main.scss";
-import React ,{Component} from "react";
-import {render} from "react-dom";
-// import Home from "./Components/Home";
-import AsyncComponent from "./Components/AsyncComponent";
+import React, {component} from "react";
+import { render } from "react-dom";
+import Home from "./components/Home/Home";
 
-document.body.appendChild(component());
+const HomePage = () =>{return <h1>Home page</h1>}
+const User = () =>{return <h1>User page</h1>}
+
 render(
-    <div>
-      <AsyncComponent loader={() => import("./Components/Home")} />
-    </div>,
-  document.getElementById("app")
+  <Home></Home>,
+ document.getElementById("app")
 )

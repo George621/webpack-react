@@ -1,9 +1,18 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const webpack = require("webpack");
+const GitRevisionPlugin = require("git-revision-webpack-plugin");
+const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require(
+  "optimize-css-assets-webpack-plugin"
+);
+const cssnano = require("cssnano");
+
 // 抽离css 用于生产环境
 exports.extractCSS = ({ include, exclude, use = [] }) => {
   // Output extracted CSS to a file
   const plugin = new MiniCssExtractPlugin({
-    filename: "[name].css",
+    filename: "[name].[contenthash:4].css",
   });
 
   return {
@@ -118,3 +127,33 @@ exports.loadJavaScript = ({ include, exclude } = {}) => ({
 exports.generateSourceMaps = ({ type }) => ({
   devtool: type,
 });
+// 清理dist 文件夹 每次 build  删除dist 重新生成
+exports.clean = path => ({
+  plugins: [new CleanWebpackPlugin([path])],
+});
+  // 版本号 生成
+exports.attachRevision = () => ({
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: new GitRevisionPlugin().version(),
+    }),
+  ],
+});
+// 压缩
+exports.minifyJavaScript = () => ({
+  optimization: {
+    minimizer: [new UglifyWebpackPlugin({ sourceMap: true })],
+  },
+});
+// 压缩css
+exports.minifyCSS = ({ options }) => ({
+  plugins: [
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: cssnano,
+      cssProcessorOptions: options,
+      canPrint: false,
+    }),
+  ],
+});
+
+// 多页应用 用到了在配置  大功告成
