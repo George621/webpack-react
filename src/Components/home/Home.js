@@ -2,7 +2,8 @@ import "./home.scss"
 import React, { Component } from 'react'
 import { BrowserRouter, HashRouter, Switch, Route, Link } from 'react-router-dom'
 import { MemoryRouter } from 'react-router'
-import PrimaryLayout from "../primaryLayout/PrimaryLayout";
+import PrimaryLayout from "../primaryLayout/PrimaryLayout"
+import Form from "../form/Form"
 
 class Home extends Component {
   render() {
@@ -21,7 +22,7 @@ class Home extends Component {
         {/* <MemoryRouter>
           <PrimaryLayout></PrimaryLayout>
         </MemoryRouter> */}
-
+        <Form />
       </div>
   }
 }
